@@ -15,6 +15,7 @@ import MovieDetail from './movies/MovieDetail'
 import NavBar from './navbar'
 import Login from './login'
 import Signup from './signup'
+import LoginForm from './LoginForm'
 const middleware = [logger,thunk]
 // Movie app 
 
@@ -54,7 +55,9 @@ class App extends Component {
   state = {
     authed: false,
   }
-
+  handleSubmit = values => {
+    window.alert(JSON.stringify(values, null, 4));
+  };
 
   logoutHandler = () => {
     this.setState({
@@ -85,7 +88,7 @@ class App extends Component {
       <Switch>
     <Route exact path='/' authed={this.state.authed} component={MovieList}/>
     <Route authed={this.state.authed} path="/signup" render={props => <Signup registerHandler={this.registerHandler} />} />
-
+    <Route  path='/login1' authed={this.state.authed} handleSubmit={this.handleSubmit} component={LoginForm}/>
     <Route authed={this.state.authed} path="/login" render={props => <Login loginHandler={this.loginHandler} />} />
     <PrivateRoute path='/:id'  authed={this.state.authed}  component={MovieDetail}/>
       </Switch>
